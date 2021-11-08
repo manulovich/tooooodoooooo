@@ -1,0 +1,20 @@
+.header {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 0 0 5px 5px;
+    position: relative;
+    padding: 5px 26px;
+}
+.heeader__title {
+    text-align: center;
+    font-size: 1.5rem; /* 36px */
+}
+.header__subtitle {
+    font-size: .75rem; /* 18px */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: #61DAFB;
+    border-radius: 5px;
+    padding: 5px 26px;
+    position: absolute;
+    bottom: -1rem;
+    right: 42px;
+}

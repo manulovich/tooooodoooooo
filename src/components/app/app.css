@@ -1,0 +1,23 @@
+/* basic reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html,
+body {
+    height: 100%;
+}
+html {
+    font-size: clamp(18px, 1.65vmax, 24px);
+
+}
+/*  /reset */
+
+.wrapper {
+    max-width: 996px;
+    margin: 0 auto;
+    padding: 0 20px;
+    color: #4E4545;
+    font-family: sans-serif;
+}

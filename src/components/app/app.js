@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../header';
-import ViewCtrl from '../view-ctrl'
+import AddTask from '../add-task';
+import Filter from '../filter';
 import ListTask from '../list-task';
 import './app.css';
 
@@ -21,7 +22,6 @@ class App extends React.Component {
                 return { tasks };
             })
         };
-
     }
 
     render() {
@@ -30,7 +30,14 @@ class App extends React.Component {
         return (
             <div className='wrapper'>
                 <Header title='Очередная todo-шка' subtitle='на реакте' />
-                <ViewCtrl placeholder='tap to search' />
+                <div className='ctrl app__ctrl'>
+                    <div className='ctrl__add-task'>
+                        <AddTask placeholder='tap to input task' />
+                    </div>
+                    <div className='ctrl__filter-task'>
+                        <Filter />
+                    </div>
+                </div>
                 <ListTask tasks={ tasks } onDeleted={ this.onDeleted } />
             </div>
         );

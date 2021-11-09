@@ -21,37 +21,3 @@ html {
     color: #4E4545;
     font-family: sans-serif;
 }
-
-.app__ctrl {
-    margin-top: 80px;
-}
-
-.ctrl {
-    display: flex;
-    flex-wrap: wrap;
-}
-.ctrl__add-task {
-    flex: 1 1 auto;
-    margin-right: 20px;
-    min-width: 260px;
-}
-.ctrl__add-task {
-    
-}
-.ctrl__filter-task {
-    
-}
-
-@media (max-width: 640px) {
-    .ctrl {
-        display: block;
-    }
-    .ctrl__add-task {
-        margin-right: 0;
-    }
-    .ctrl__filter-task {
-        margin-top: 20px;
-        display: flex;
-        justify-content: center;
-    }
-}

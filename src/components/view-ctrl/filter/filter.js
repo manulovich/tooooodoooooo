@@ -4,7 +4,7 @@ import './filter.css';
 class Filter extends React.Component {
     render() {
         return (
-            <div className='filter'>
+            <div className='filter view-ctrl__filter'>
                 <button
                     data-message='показать все задачи'
                     className='filter__item filter__item--active'

@@ -1,20 +1,41 @@
 import React from 'react';
 import './add-task.css';
 
-const AddTask = ({ newTask }) => {
-    const onSubmitHandler = (e) => {
-        e.preventDefault();
-        const newTaskInput = document.getElementById('new-task');
-        newTask(newTaskInput.value);
-        newTaskInput.value = ''; // clear input
+class AddTask extends React.Component {
+    state = {
+        inputValue: ''
     };
 
-    return (
-        <form className='add-new-task' onSubmit={ onSubmitHandler }>
-            <input type='text' id='new-task' placeholder='new task' />
-            <button type='submit'>Добавить задачу</button>
-        </form>
-    );
-};
+    onSubmit = (e) => {
+        e.preventDefault();
+        this.props.newTask(this.state.inputValue);
+
+        /* clear input */
+        this.setState({
+            inputValue: ''
+        });
+    };
+
+    onInputChange = (e) => {
+        this.setState({
+            inputValue: e.target.value
+        });
+    };
+
+    render() {
+        return (
+            <form className='add-new-task' onSubmit={ this.onSubmit }>
+                <input
+                    type='text'
+                    id='new-task'
+                    placeholder='new task'
+                    onChange={this.onInputChange}
+                    value={this.state.inputValue}
+                />
+                <button type='submit'>Добавить задачу</button>
+            </form>
+        );    
+    }
+}
 
 export default AddTask;

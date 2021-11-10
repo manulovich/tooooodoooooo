@@ -3,34 +3,15 @@ import deleteIcon from './icons/delete.png';
 import './task.css';
 
 class Task extends React.Component {
-
-    constructor() {
-        super();
-        this.state = {
-            done: false,
-            important: false
-        };
-
-        this.onLabelClick = () => {
-            this.setState(({ done }) => {
-                return {
-                    done: !done
-                }
-            });
-        };
-
-        this.onImportant = () => {
-            this.setState(({ important }) => {
-                return {
-                    important: !important
-                }
-            });
-        };
-    }
-
     render() {
-        const { value, onDeleted } = this.props;
-        const { done, important } = this.state;
+        const {
+            value,
+            done,
+            important,
+            onToggleDone,
+            onDeleted,
+            onToggleImportant
+        } = this.props;
 
         let taskClassName =  'task';
         if (important) taskClassName += ' task--important'
@@ -38,7 +19,7 @@ class Task extends React.Component {
 
         return (
             <div className={ taskClassName }>
-                <span onClick={ this.onLabelClick }>{ value }</span>
+                <span onClick={ onToggleDone }>{ value }</span>
 
                 <div className='task__item-action item-action'>
                     <button
@@ -53,7 +34,7 @@ class Task extends React.Component {
                         data-message='отметить важным'
                         className='item-action__act'
                         data-type='important'
-                        onClick={ this.onImportant }
+                        onClick={ onToggleImportant }
                     >
                         !
                     </button>

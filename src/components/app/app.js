@@ -2,27 +2,80 @@ import React from 'react';
 import Header from '../header';
 import ViewCtrl from '../view-ctrl'
 import ListTask from '../list-task';
+import AddTask from '../add-task';
 import './app.css';
 
 class App extends React.Component {
-    constructor() {
-        super();
+    id = 100;
 
-        this.state = {
-            tasks: [
-                { value: 'Drink Coffee', important: true, id: 12212 },
-                { value: 'Build app', important: false, id: 1222 },
-            ]
+    /* -- utils -- */
+    toggleObjProperty = (array, id, prop) => {
+        const idx = array.findIndex(task => task.id === id);
+        const oldItem = array[idx];
+        const newItem = { ...oldItem, [prop]: !oldItem[prop] };
+
+        return [
+            ...array.slice(0, idx),
+            newItem,
+            ...array.slice(idx + 1)
+        ]
+
+    };
+
+    createTask = (value) => {
+        return {
+            value,
+            important: false,
+            done: false,
+            id: this.id++
         };
+    };
+    /* -- /utils -- */
 
-        this.onDeleted = (id) => {
-            this.setState(({ tasks }) => {
-                tasks = tasks.filter((task) => task.id !== id);
-                return { tasks };
-            })
-        };
+    /* -- event handler -- */
+    onDeleted = (id) => {
+        this.setState(({ tasks }) => {
+            tasks = tasks.filter((task) => task.id !== id);
+            return { tasks };
+        });
+    };
 
-    }
+    addNewTask = (value) => {
+        this.setState(({ tasks }) => {
+            return {
+                tasks: [
+                    ...tasks,
+                    this.createTask(value),
+                ]
+            };
+        });
+    };
+
+    onToggleDone = (id) => {
+        this.setState(({ tasks }) => {
+            return {
+                tasks: this.toggleObjProperty(tasks, id, 'done')
+            }
+        });
+    };
+
+    onToggleImportant = (id) => {
+        this.setState(({ tasks }) => {
+            return {
+                tasks: this.toggleObjProperty(tasks, id, 'important')
+            }
+        });
+    };
+    /* -- /event handler -- */
+
+    /* -- state -- */
+    state = {
+        tasks: [
+            this.createTask('Drink Coffee'),
+            this.createTask('Build app')
+        ]
+    };
+    /* -- /state -- */
 
     render() {
         const { tasks } = this.state;
@@ -31,7 +84,13 @@ class App extends React.Component {
             <div className='wrapper'>
                 <Header title='Очередная todo-шка' subtitle='на реакте' />
                 <ViewCtrl placeholder='tap to search' />
-                <ListTask tasks={ tasks } onDeleted={ this.onDeleted } />
+                <ListTask
+                    tasks={ tasks }
+                    onDeleted={ this.onDeleted }
+                    onToggleDone={ this.onToggleDone }
+                    onToggleImportant={ this.onToggleImportant }
+                />
+                <AddTask newTask={ this.addNewTask } />
             </div>
         );
     }

@@ -1,0 +1,30 @@
+.add-new-task {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 -20px;
+}
+
+.add-new-task > * {
+    flex: 1 1 auto;
+    font-size: .9rem;
+    font-weight: 500;
+    margin: 40px 20px 0 20px;
+    padding: 10px;
+
+    border: none;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+.add-new-task button[type='submit'] {
+    background-color: #48be00;
+    cursor: pointer;
+    color: #fff;
+}
+
+.add-new-task button[type='submit']:active {
+    box-shadow: none;
+    position: relative;
+    top: 3px;
+}

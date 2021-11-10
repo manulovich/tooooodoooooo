@@ -1,8 +1,8 @@
 import React from 'react';
-import Task from './task/task';
+import Task from './task';
 import './list-task.css';
 
-const ListTask = ({ tasks, onDeleted }) => {
+const ListTask = ({ tasks, onToggleDone, onDeleted, onToggleImportant }) => {
     return (
         <section className='list-task' data-message='список задач'>
             <ul>
@@ -12,7 +12,11 @@ const ListTask = ({ tasks, onDeleted }) => {
 
                         return (
                             <li className='list-task__item' key={ id }>
-                                <Task { ...rest } onDeleted={() => onDeleted(id)} />
+                                <Task { ...rest }
+                                    onToggleDone={ () => onToggleDone(id) }
+                                    onDeleted={ () => onDeleted(id) }
+                                    onToggleImportant={ () => onToggleImportant(id) }
+                                />
                             </li>
                         )
                     })

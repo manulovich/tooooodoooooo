@@ -12,7 +12,7 @@
     color: inherit;
     cursor: pointer;
 }
-.filter__item.filter__item--active {
+.filter__item--active {
     background-color: #48BE00;
     box-shadow: none;
     color: #fff;

@@ -3,11 +3,12 @@ import Filter from './filter';
 import Search from './search';
 import './view-ctrl.css';
 
-const ViewCtrl = ({ placeholder }) => {
+const ViewCtrl = ({ placeholder, filter, onToggleFilter, onChangeSearchInput }) => {
+
     return (
         <div className='view-ctrl'>
-            <Search placeholder={ placeholder } />
-            <Filter />
+            <Search placeholder={ placeholder } onChangeSearchInput={ onChangeSearchInput } />
+            <Filter filter={ filter } onToggleFilter={ onToggleFilter } />
         </div>
     );
 };

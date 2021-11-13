@@ -10,7 +10,10 @@ class AddTask extends React.Component {
         e.preventDefault();
         this.props.newTask(this.state.inputValue);
 
-        /* clear input */
+        this.clearInputValue();
+    };
+
+    clearInputValue = () => {
         this.setState({
             inputValue: ''
         });

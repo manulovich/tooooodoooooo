@@ -20,7 +20,7 @@ class App extends React.Component {
             ...array.slice(idx + 1)
         ]
 
-    };
+    }
 
     createTask = (value) => {
         return {
@@ -29,7 +29,27 @@ class App extends React.Component {
             done: false,
             id: this.id++
         };
-    };
+    }
+
+    search(tasks, term) {
+        return tasks.filter(task => {
+            return task.value.toUpperCase()
+                .includes(term.toUpperCase())
+        });
+    }
+
+    filter(tasks, params) {
+        switch (params) {
+            case 'active':
+                return tasks.filter(task => !task.done);
+            case 'done':
+                return tasks.filter(task => task.done);
+            case 'all':
+                return tasks;
+            default:
+                return tasks;
+        }
+    }
     /* -- /utils -- */
 
     /* -- event handler -- */
@@ -38,7 +58,7 @@ class App extends React.Component {
             tasks = tasks.filter((task) => task.id !== id);
             return { tasks };
         });
-    };
+    }
 
     addNewTask = (value) => {
         this.setState(({ tasks }) => {
@@ -49,7 +69,7 @@ class App extends React.Component {
                 ]
             };
         });
-    };
+    }
 
     onToggleDone = (id) => {
         this.setState(({ tasks }) => {
@@ -65,7 +85,19 @@ class App extends React.Component {
                 tasks: this.toggleObjProperty(tasks, id, 'important')
             }
         });
-    };
+    }
+
+    onToggleFilter = (type) => {
+        this.setState({
+            filter: type 
+        });
+    }
+
+    onChangeSearchInput = (text) => {
+        this.setState({
+            text: text
+        });
+    }
     /* -- /event handler -- */
 
     /* -- state -- */
@@ -73,17 +105,26 @@ class App extends React.Component {
         tasks: [
             this.createTask('Drink Coffee'),
             this.createTask('Build app')
-        ]
-    };
+        ],
+        filter: 'all',
+        text: ''
+    }
     /* -- /state -- */
 
     render() {
-        const { tasks } = this.state;
+        let { tasks, filter, text } = this.state;
+        
+        tasks = this.search(this.filter(tasks, filter), text);
 
         return (
             <div className='wrapper'>
                 <Header title='Очередная todo-шка' subtitle='на реакте' />
-                <ViewCtrl placeholder='tap to search' />
+                <ViewCtrl
+                    placeholder='tap to search'
+                    filter={ filter }
+                    onToggleFilter={ this.onToggleFilter }
+                    onChangeSearchInput={ this.onChangeSearchInput }
+                />
                 <ListTask
                     tasks={ tasks }
                     onDeleted={ this.onDeleted }
